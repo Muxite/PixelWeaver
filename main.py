@@ -1,7 +1,6 @@
 from PIL import Image, ImageDraw
 import numpy as np
 import random
-import noise
 
 
 class Creation:
@@ -106,7 +105,7 @@ class Creation:
                                     alive_around += 1
                             except:
                                 pass
-                # these are directly the rules of Conway's Game of Life
+
                 try:
                     if alive:
                         if alive_around in [5, 6, 7, 8]:
@@ -114,7 +113,6 @@ class Creation:
                         else:
                             self.pixels[x, y] = dr, dg, db
                     else:
-                        # if there are exactly three alive around it, a dead one becomes alive
                         if alive_around in [3, 5, 6, 7, 8]:
                             self.pixels[x, y] = ar, ag, ab
                 except:
@@ -138,10 +136,22 @@ class Creation:
         self.image.save(str(title) + ".png")
 
 
-def main():
-    e = Creation(400, 400, 0, 0, 0)
-    e.cloud(50, (255, 255, 255), 3, 0.5, 123)
-    e.save("cloud")
+# def main():
+#     e = Creation(300, 300, 0, 0, 0)
+#     e.scatter(15000, 100, 60, 255, 255, 255)
+#     for i in range(1, 300):
+#         e.diamoeba(0, 0, 0, 255, 255, 255)
+#         if i%20 == 0:
+#             e.scatter(4000, i, 15+(i/10), 255, 255, 255)
+#         e.save(i)
 
+def main():
+    e = Creation(200, 200, 0, 0, 0)
+    e.scatter(10000, 100, 20, 255, 255, 255)
+    for i in range(1, 400):
+        e.conway(0, 0, 0, 255, 255, 255)
+        if i%20 == 0:
+            e.scatter(1000, i/2, 10, 255, 255, 255)
+        e.save(i)
 
 main()
