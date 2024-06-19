@@ -11,10 +11,10 @@ class Creation:
         self.image = Image.new(mode="RGB", size=(self.w, self.h), color=(r, g, b))
         self.pixels = self.image.load()
 
-    def scatter(self, count, mean, stdev, r, g, b):
+    def scatter(self, count, meanx, meany, stdevx, stdevy, r, g, b):
         for i in range(count):
-            x = round(np.random.normal(mean, stdev))
-            y = round(np.random.normal(mean, stdev))
+            x = round(np.random.normal(meanx, stdevx))
+            y = round(np.random.normal(meany, stdevy))
             try:
                 self.pixels[x, y] = r, g, b
             except:
@@ -154,4 +154,22 @@ def main():
             e.scatter(1000, i/2, 10, 255, 255, 255)
         e.save(i)
 
-main()
+
+add = []
+
+
+def banner():
+    for j in range(10):
+        banner_map = Creation(240, 120, 0, 0, 0)
+        for i in range(0, 600):
+            if i%601 == 0:
+                banner_map.scatter(20000, 120, 60, 1000, 60, 160, 160, 160)
+            banner_map.conway(0, 0, 0, 160, 160, 160)
+            new_img = banner_map.image.copy()
+            up_scale = new_img.resize((960, 480), resample=Image.BOX)
+            # make bigger, don't AA
+            add.append(up_scale)
+    add[0].save("240 banner 4x.gif", save_all=True, append_images=add[1:], optimize=True, duration=100, loop=0)
+
+
+banner()
