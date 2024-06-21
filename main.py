@@ -160,16 +160,16 @@ add = []
 
 def banner():
     for j in range(10):
-        banner_map = Creation(240, 120, 0, 0, 0)
+        banner_map = Creation(480, 120, 0, 0, 0)
         for i in range(0, 600):
             if i%601 == 0:
-                banner_map.scatter(20000, 120, 60, 1000, 60, 160, 160, 160)
+                banner_map.scatter(40000, 120, 30, 1000, 60, 160, 160, 160)
             banner_map.conway(0, 0, 0, 160, 160, 160)
             new_img = banner_map.image.copy()
-            up_scale = new_img.resize((960, 480), resample=Image.BOX)
+            up_scale = new_img.resize((960, 240), resample=Image.BOX)
             # make bigger, don't AA
             add.append(up_scale)
-    add[0].save("240 banner 4x.gif", save_all=True, append_images=add[1:], optimize=True, duration=100, loop=0)
+    add[0].save("480 120 banner 2x.gif", save_all=True, append_images=add[1:], optimize=True, duration=100, loop=0)
 
 
 banner()
